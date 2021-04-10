@@ -15,19 +15,27 @@
                 <li {% if section == "dashboard" %}class="selected" {% endif %}>
                     <a href="{% url "dashboard" %}">My dashboard</a>
                 </li>
-                <li{% if section == "objects" %} class="selected" {% endif %}>
-                    <a href="{% url "objects" %}">Objects</a>
+                <li{% if section != "dashboard" and section != "about_us" %} class="selected" {% endif %}>
+                    <a href="{% url "figures:figures" %}">Objects</a>
                 </li>
                 <li{% if section == "about_us" %} class="selected" {% endif %}>
                     <a href="{% url "about_us" %}">About me</a>
                 </li>
+
+                <li {% if request.user.is_staff %} class="selected" {% endif %}>
+                    {% if request.user.is_staff %}
+                        <a href="{% url "figures:create" %}">Create</a>
+                    {% endif %}
+                </li>
+
             </ul>
         {% endif %}
 
         <span class="user">
             {% if request.user.is_authenticated %}
                 Hello {{ request.user.first_name }},
-                <a href="{% url 'logout' %}">Logout</a>
+                <a href="{% url "logout" %}">Logout</a>
+
             {% else %}
                 <a href="{% url 'login' %}">Login</a>
             {% endif %}

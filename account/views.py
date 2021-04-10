@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login
@@ -81,11 +81,6 @@ def dashboard(request):
                   'account/dashboard.html',
                   {'section':'dashboard'})
 
-@login_required
-def objects(request):
-    return render(request,
-                  'account/objects.html',
-                  {'section':'objects'})
 
 @login_required
 def about_us(request):

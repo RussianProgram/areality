@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    {{ figure.name }}
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{ figure.name }}</h1>
+        {% if request.user.is_staff %}
+             <h2>
+            <a href="{% url "figures:edit" pk=figure.id %}">Edit</a>
+             </h2>
+             <hr>
+
+            <h2>
+            <a href="{% url "figures:delete" pk=figure.id %}">Delete</a
+
+            </h2>
+            <hr>
+
+        {% endif %}
+
+
+
+
+    <div class="wrap">
+    <div class="image-preview">
+            <img src="{{ figure.images.url }}" alt="image" class="image">
+             <div class="image-info">
+                <p>Ссылка: <a href="{{ figure.url }}">Открыть Модель...</a></p>
+            </div>
+
+    </div>
+
+    <div class="image-container">
+        <p>Описание:</p>
+        <p class="description" align="justify">{{ figure.description|safe }}</p>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}
